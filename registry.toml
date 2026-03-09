@@ -1,0 +1,27 @@
+[registry]
+name = "Awal Skills Registry"
+description = "Shared AI skills for common development stacks"
+
+[stacks.go]
+detect = ["go.mod", "go.sum"]
+
+[stacks.flutter]
+detect = ["pubspec.yaml"]
+
+[stacks.swift]
+detect = ["Package.swift", "*.xcodeproj"]
+
+[stacks.python]
+detect = ["pyproject.toml", "setup.py", "requirements.txt"]
+
+[stacks.csharp]
+detect = ["*.csproj", "*.sln"]
+
+[stacks.rust]
+detect = ["Cargo.toml"]
+
+[stacks.node]
+detect = ["package.json"]
+
+[stacks.java]
+detect = ["pom.xml", "build.gradle"]
