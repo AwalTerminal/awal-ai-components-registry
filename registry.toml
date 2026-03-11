@@ -1,6 +1,6 @@
 [registry]
-name = "Awal Skills Registry"
-description = "Shared AI skills for common development stacks"
+name = "Awal AI Components Registry"
+description = "Shared AI components for common development stacks"
 
 [stacks.go]
 detect = ["go.mod", "go.sum"]
@@ -9,7 +9,7 @@ detect = ["go.mod", "go.sum"]
 detect = ["pubspec.yaml"]
 
 [stacks.swift]
-detect = ["Package.swift", "*.xcodeproj"]
+detect = ["Package.swift", "*.xcodeproj", "*.xcworkspace"]
 
 [stacks.python]
 detect = ["pyproject.toml", "setup.py", "requirements.txt"]
@@ -24,4 +24,22 @@ detect = ["Cargo.toml"]
 detect = ["package.json"]
 
 [stacks.java]
-detect = ["pom.xml", "build.gradle"]
+detect = ["pom.xml", "build.gradle", "build.gradle.kts"]
+
+[stacks.kotlin]
+detect = ["build.gradle.kts", "*.kt"]
+
+[stacks.php]
+detect = ["composer.json", "artisan"]
+
+[stacks.ruby]
+detect = ["Gemfile", "*.gemspec", "Rakefile"]
+
+[stacks.zig]
+detect = ["build.zig"]
+
+[stacks.elixir]
+detect = ["mix.exs"]
+
+[stacks.cpp]
+detect = ["CMakeLists.txt"]
