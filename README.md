@@ -21,10 +21,10 @@ common/                    # Components loaded for ALL projects
   agents/
     refactor/agent.json     # Refactoring agent
 stacks/
+  # Languages
   swift/                   # Swift-specific components
   rust/                    # Rust-specific components
   go/                      # Go-specific components
-  flutter/                 # Flutter-specific components
   python/                  # Python-specific components
   node/                    # Node.js-specific components
   java/                    # Java-specific components
@@ -35,6 +35,30 @@ stacks/
   zig/                     # Zig-specific components
   elixir/                  # Elixir-specific components
   cpp/                     # C++-specific components
+  scala/                   # Scala-specific components
+  haskell/                 # Haskell-specific components
+  clojure/                 # Clojure-specific components
+  ocaml/                   # OCaml-specific components
+  fsharp/                  # F#-specific components
+  r/                       # R-specific components
+  julia/                   # Julia-specific components
+  perl/                    # Perl-specific components
+  lua/                     # Lua-specific components
+  dart/                    # Dart-specific components
+  objc/                    # Objective-C-specific components
+  shell/                   # Shell/Bash-specific components
+  # Frameworks
+  flutter/                 # Flutter-specific components
+  typescript/              # TypeScript-specific components
+  svelte/                  # Svelte-specific components
+  vue/                     # Vue-specific components
+  angular/                 # Angular-specific components
+  react-native/            # React Native-specific components
+  # DevOps / Infrastructure
+  terraform/               # Terraform-specific components
+  docker/                  # Docker-specific components
+  ansible/                 # Ansible-specific components
+  kubernetes/              # Kubernetes-specific components
 ```
 
 ## Setup
