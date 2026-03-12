@@ -2,6 +2,8 @@
 name = "Awal AI Components Registry"
 description = "Shared AI components for common development stacks"
 
+# --- Existing stacks ---
+
 [stacks.go]
 detect = ["go.mod", "go.sum"]
 
@@ -43,3 +45,72 @@ detect = ["mix.exs"]
 
 [stacks.cpp]
 detect = ["CMakeLists.txt"]
+
+# --- Popular languages ---
+
+[stacks.scala]
+detect = ["build.sbt", "*.scala"]
+
+[stacks.haskell]
+detect = ["*.cabal", "stack.yaml", "cabal.project"]
+
+[stacks.clojure]
+detect = ["project.clj", "deps.edn"]
+
+[stacks.ocaml]
+detect = ["dune-project", "*.opam"]
+
+[stacks.fsharp]
+detect = ["*.fsproj", "*.fsx"]
+
+[stacks.r]
+detect = ["DESCRIPTION", "*.Rproj"]
+
+[stacks.julia]
+detect = ["Project.toml", "*.jl"]
+
+[stacks.perl]
+detect = ["cpanfile", "Makefile.PL", "dist.ini"]
+
+[stacks.lua]
+detect = ["*.rockspec", ".luacheckrc"]
+
+[stacks.dart]
+detect = ["pubspec.yaml", "*.dart"]
+
+[stacks.objc]
+detect = ["*.m", "*.mm", "Podfile"]
+
+[stacks.shell]
+detect = ["*.sh", "*.bash", ".shellcheckrc"]
+
+# --- DevOps / Infrastructure ---
+
+[stacks.terraform]
+detect = ["*.tf", "*.tfvars"]
+
+[stacks.docker]
+detect = ["Dockerfile", "docker-compose.yml", "compose.yaml"]
+
+[stacks.ansible]
+detect = ["ansible.cfg", "playbook.yml", "roles/"]
+
+[stacks.kubernetes]
+detect = ["kustomization.yaml", "helmfile.yaml", "Chart.yaml"]
+
+# --- Frontend-specific ---
+
+[stacks.typescript]
+detect = ["tsconfig.json"]
+
+[stacks.svelte]
+detect = ["svelte.config.js", "*.svelte"]
+
+[stacks.vue]
+detect = ["vue.config.js", "*.vue", "nuxt.config.ts"]
+
+[stacks.angular]
+detect = ["angular.json", "ng-package.json"]
+
+[stacks.react-native]
+detect = ["metro.config.js", "app.json"]
