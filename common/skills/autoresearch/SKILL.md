@@ -4,7 +4,7 @@ You are an autonomous research agent. Your job is to continuously improve a code
 
 ## Trigger
 
-Activate when the user says: `/autoresearch`, "autoresearch", "optimize this", "run experiments", or "experiment loop".
+Activate when the user says: `/autoresearch`, "autoresearch", or "experiment loop".
 
 ## Setup
 
@@ -18,6 +18,7 @@ Before starting the loop, agree on these parameters with the user:
 | **Direction** | Lower is better or higher is better? | `lower` |
 | **Files in scope** | Which files can be modified | `src/engine.ts, src/utils.ts` |
 | **Timeout** | Max time per run | `5 minutes` |
+| **Max experiments** | Stop after N experiments (default: 50) | `50` |
 | **Constraints** | What must NOT change | "Don't remove any test cases" |
 
 If the user provides a short instruction like `/autoresearch optimize test speed`, infer reasonable defaults and confirm them before starting.
@@ -40,7 +41,7 @@ commit	<metric_name>	status	description
 ## The Experiment Loop
 
 ```
-LOOP FOREVER:
+LOOP (up to max_experiments):
   1. THINK    — Study the code. What hypothesis could improve the metric?
                 Re-read source files if needed. Reason deeply.
   2. EDIT     — Make a focused change. One idea per experiment.
@@ -58,7 +59,10 @@ LOOP FOREVER:
   8. CONTINUE — Go to step 1. NEVER stop. NEVER ask "should I continue?"
 ```
 
-**NEVER STOP.** Do not ask for permission to continue. Do not summarize progress and wait. The loop runs until the user interrupts you or you've exhausted all reasonable ideas (at which point you should try increasingly creative approaches before truly stopping).
+**NEVER STOP.** Do not ask for permission to continue. Do not summarize progress and wait. The loop runs until:
+- The experiment count reaches `max_experiments` (default: 50).
+- The user interrupts.
+- You've exhausted all reasonable ideas (try increasingly creative approaches before truly stopping).
 
 ---
 
@@ -168,8 +172,16 @@ This is informational only. Do not stop or wait for input after printing it.
 
 ## Safety
 
-- Never modify files outside the declared scope.
-- Never push to remote. All work stays on the local branch.
-- Never modify CI/CD configuration, deployment scripts, or infrastructure files.
-- If a change could affect data integrity (database schemas, migration files), flag it to the user and skip.
-- The user can always `git diff autoresearch/<tag>..main` to see exactly what changed.
+- **Scope enforcement:** Never modify files outside the declared scope.
+- **No remote writes:** Never push to remote. Never create PRs. All work stays on the local branch.
+- **Scoped git resets only:** `git reset --hard HEAD~1` is permitted to discard failed experiments on the autoresearch branch. Never use broader resets (`HEAD~N` where N > 1), `git clean -f`, or `git checkout .`.
+- **Protected files — never modify these under any circumstances:**
+  - `.env`, `.env.*`, credentials, secrets, API keys, tokens
+  - CI/CD configuration (`.github/`, `.gitlab-ci.yml`, `Jenkinsfile`, etc.)
+  - Deployment scripts, infrastructure files, Dockerfiles
+  - `.claude/`, `.cursor/`, or other tool configuration directories
+  - Database schemas, migration files
+- **Resource limits:** Respect the `timeout` per run and `max_experiments` total limit.
+
+- **Auditability:** The user can always `git diff main..autoresearch/<tag>` to see cumulative changes, and `results.tsv` has the full experiment history.
+- If a change could affect data integrity or security, flag it to the user and skip.
