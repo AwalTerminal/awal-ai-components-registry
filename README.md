@@ -1,64 +1,96 @@
 # Awal AI Components Registry
 
-Shared AI components registry for [Awal Terminal](https://github.com/AwalTerminal/Awal-terminal). Components (skills, rules, prompts, agents) are automatically loaded based on your project type and injected into AI sessions (Claude, Gemini, Codex).
+Production-quality AI components for [Awal Terminal](https://github.com/AwalTerminal/Awal-terminal). Components (skills, rules, prompts, agents) are automatically loaded based on your project type and injected into AI sessions.
+
+Every skill has concrete checklists, output format specs, stop conditions, and anti-patterns — not vague guidelines.
+
+## Common Components (loaded for ALL projects)
+
+| Component | Type | Description |
+|-----------|------|-------------|
+| `/review` | Skill | Two-pass code review (critical → informational) with `file:line` output |
+| `/ship` | Skill | Automated release pipeline with stack-aware test detection |
+| `/plan` | Skill | Architecture review with product + engineering modes |
+| `/retro` | Skill | Engineering retrospective from git history with metrics |
+| `/qa` | Skill | Quality assurance with 8-category health scoring rubric |
+| `/explain` | Prompt | Structured code explanation with 3 depth levels |
+| `/optimize` | Prompt | Profiling-first performance optimization |
+| `clean-code` | Rule | Complexity thresholds, naming conventions, anti-patterns |
+| `security` | Rule | OWASP Top 10 mapping, secrets detection, trust boundaries |
+| `refactor` | Agent | Named refactoring patterns with complexity reduction targets |
+| `debug` | Agent | Systematic debugging: reproduce → isolate → identify → fix → verify |
+
+## Stack Coverage (35 stacks)
+
+### Tier 1 — Deeply detailed
+| Stack | Detect | Components |
+|-------|--------|------------|
+| Swift | `Package.swift`, `*.xcodeproj` | patterns, style, commands |
+| Rust | `Cargo.toml` | patterns, style, commands |
+| Go | `go.mod`, `go.sum` | patterns, style, commands |
+| Python | `pyproject.toml`, `setup.py`, `requirements.txt` | patterns, style, commands |
+| TypeScript | `tsconfig.json` | patterns, react-patterns, style, commands |
+| Java | `pom.xml`, `build.gradle` | patterns, style, commands |
+| Kotlin | `build.gradle.kts`, `*.kt` | patterns, style, commands |
+| Dart | `pubspec.yaml`, `*.dart` | patterns, style, commands |
+
+### Tier 2 — Solid coverage
+| Stack | Detect | Components |
+|-------|--------|------------|
+| PHP | `composer.json`, `artisan` | patterns, style, commands |
+| Ruby | `Gemfile`, `*.gemspec` | patterns, style, commands |
+| C# | `*.csproj`, `*.sln` | patterns, style, commands |
+| C++ | `CMakeLists.txt` | patterns, style, commands |
+| Scala | `build.sbt` | patterns, style, commands |
+| Elixir | `mix.exs` | patterns, style, commands |
+| Zig | `build.zig` | patterns, style, commands |
+
+### Tier 3 — Essential patterns
+Haskell, Clojure, OCaml, F#, R, Julia, Perl, Lua, Objective-C, Shell/Bash
+
+### Frameworks
+| Stack | Detect | Components |
+|-------|--------|------------|
+| Flutter | `pubspec.yaml` | patterns, style, commands, hooks |
+| Svelte | `svelte.config.js`, `*.svelte` | patterns, style, commands |
+| Vue | `vue.config.js`, `*.vue`, `nuxt.config.ts` | patterns, style, commands |
+| Angular | `angular.json` | patterns, style, commands |
+| React Native | `metro.config.js`, `app.json` | patterns, style, commands |
+| Node.js | `package.json` | patterns |
+
+### DevOps / Infrastructure
+| Stack | Detect | Components |
+|-------|--------|------------|
+| Terraform | `*.tf`, `*.tfvars` | patterns, style, commands |
+| Docker | `Dockerfile`, `compose.yaml` | patterns, style, commands |
+| Kubernetes | `kustomization.yaml`, `Chart.yaml` | patterns, style, commands |
+| Ansible | `ansible.cfg`, `playbook.yml` | patterns, style, commands |
 
 ## Structure
 
 ```
-registry.toml              # Stack detection rules
+registry.toml              # Stack detection rules (35 stacks)
 common/                    # Components loaded for ALL projects
   skills/
-    code-review/SKILL.md   # Code review guidelines
-    testing/SKILL.md        # Testing best practices
+    review/SKILL.md        # Two-pass code review
+    ship/SKILL.md          # Automated release pipeline
+    plan/SKILL.md          # Architecture review
+    retro/SKILL.md         # Engineering retrospective
+    qa/SKILL.md            # Quality assurance testing
   rules/
-    clean-code.md           # Clean code conventions
-    security.md             # Security rules
+    clean-code.md          # Code quality with complexity thresholds
+    security.md            # OWASP-mapped security rules
   prompts/
-    explain.md              # Explain code prompt
-    optimize.md             # Optimization analysis prompt
-  commands/
-    deploy.md               # Deployment checklist
+    explain.md             # Structured code explanation
+    optimize.md            # Performance optimization
   agents/
-    refactor/agent.json     # Refactoring agent
-stacks/
-  # Languages
-  swift/                   # Swift-specific components
-  rust/                    # Rust-specific components
-  go/                      # Go-specific components
-  python/                  # Python-specific components
-  node/                    # Node.js-specific components
-  java/                    # Java-specific components
-  kotlin/                  # Kotlin-specific components
-  php/                     # PHP-specific components
-  ruby/                    # Ruby-specific components
-  csharp/                  # C#/.NET-specific components
-  zig/                     # Zig-specific components
-  elixir/                  # Elixir-specific components
-  cpp/                     # C++-specific components
-  scala/                   # Scala-specific components
-  haskell/                 # Haskell-specific components
-  clojure/                 # Clojure-specific components
-  ocaml/                   # OCaml-specific components
-  fsharp/                  # F#-specific components
-  r/                       # R-specific components
-  julia/                   # Julia-specific components
-  perl/                    # Perl-specific components
-  lua/                     # Lua-specific components
-  dart/                    # Dart-specific components
-  objc/                    # Objective-C-specific components
-  shell/                   # Shell/Bash-specific components
-  # Frameworks
-  flutter/                 # Flutter-specific components
-  typescript/              # TypeScript-specific components
-  svelte/                  # Svelte-specific components
-  vue/                     # Vue-specific components
-  angular/                 # Angular-specific components
-  react-native/            # React Native-specific components
-  # DevOps / Infrastructure
-  terraform/               # Terraform-specific components
-  docker/                  # Docker-specific components
-  ansible/                 # Ansible-specific components
-  kubernetes/              # Kubernetes-specific components
+    refactor/agent.json    # Refactoring specialist
+    debug/agent.json       # Systematic debugging
+stacks/                    # Stack-specific components (35 stacks)
+  <stack>/
+    skills/<stack>-patterns/SKILL.md
+    rules/<stack>-style.md
+    commands/<stack>.md
 ```
 
 ## Setup
@@ -77,29 +109,30 @@ branch = "main"
 
 ## How It Works
 
-1. Awal detects your project type by scanning for marker files (e.g., `Cargo.toml` for Rust, `composer.json` for PHP)
-2. Common components are loaded for all projects (rules, prompts, skills)
-3. Stack-specific components are loaded based on detected project type
-4. Components are injected into the AI session before launch:
+1. Awal detects your project type by scanning for marker files (e.g., `Cargo.toml` → Rust)
+2. Common components are loaded for all projects
+3. Stack-specific components are loaded based on detected stacks
+4. Components are injected into the AI session:
    - **Claude**: via the plugin system (skills, rules, agents, MCP servers, hooks)
-   - **Gemini**: via `--system-instruction-file` (rules, skills, prompts combined into markdown)
-   - **Codex**: via `--instructions` (same combined markdown)
+   - **Gemini**: via `--system-instruction-file` (combined markdown)
+   - **Codex**: via `--instructions` (combined markdown)
 
 ## Component Types
 
-| Type | Directory | Format | Description |
-|------|-----------|--------|-------------|
-| Skills | `skills/<name>/SKILL.md` | Markdown | Detailed expertise on a topic |
-| Rules | `rules/<name>.md` | Markdown | Coding conventions and constraints |
-| Prompts | `prompts/<name>.md` | Markdown | Reusable prompt templates (slash commands) |
-| Agents | `agents/<name>/agent.json` | JSON | Agent definitions with tools and instructions |
-| Commands | `commands/<name>.md` | Markdown | Task checklists and procedures |
-| MCP Servers | `mcp-servers/<name>.json` | JSON | MCP server configurations (Claude only) |
-| Hooks | `hooks/{pre,post}-session/<name>.sh` | Shell | Scripts run before/after AI sessions |
+| Type | Path | Description |
+|------|------|-------------|
+| Skills | `skills/<name>/SKILL.md` | Detailed expertise with checklists & output specs |
+| Rules | `rules/<name>.md` | Coding conventions with anti-patterns |
+| Prompts | `prompts/<name>.md` | Reusable prompt templates |
+| Agents | `agents/<name>/agent.json` | Agent definitions with tools and workflows |
+| Commands | `commands/<name>.md` | Build/test/lint command references |
+| Hooks | `hooks/{pre,post}-session/<name>.sh` | Scripts run before/after AI sessions |
 
-## Contributing
+## Quality Bar
 
-1. Add components under `common/` (for all projects) or `stacks/<stack>/` (for specific stacks)
-2. Follow the directory structure conventions above
-3. Keep content concise and actionable — AI models work best with clear, specific instructions
-4. Test by adding this repo as a registry in Awal Terminal and verifying components load
+Every component in this registry meets these standards:
+
+- **Skills**: Concrete checklists, output format specs, stop conditions, anti-patterns
+- **Rules**: Specific examples with before/after, not just guidelines
+- **Stack patterns**: Idiomatic code examples, concurrency/error handling patterns, common pitfalls
+- **Commands**: Actual commands with flags, not just tool names

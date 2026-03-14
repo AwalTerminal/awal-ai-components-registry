@@ -1,29 +1,25 @@
 [registry]
 name = "Awal AI Components Registry"
-description = "Shared AI components for common development stacks"
+description = "Production-quality AI components for 35 development stacks"
 
-# --- Existing stacks ---
-
-[stacks.go]
-detect = ["go.mod", "go.sum"]
-
-[stacks.flutter]
-detect = ["pubspec.yaml"]
+# ╔══════════════════════════════════════════════╗
+# ║  Tier 1 — Deeply detailed (most nuance)      ║
+# ╚══════════════════════════════════════════════╝
 
 [stacks.swift]
 detect = ["Package.swift", "*.xcodeproj", "*.xcworkspace"]
 
-[stacks.python]
-detect = ["pyproject.toml", "setup.py", "requirements.txt"]
-
-[stacks.csharp]
-detect = ["*.csproj", "*.sln"]
-
 [stacks.rust]
 detect = ["Cargo.toml"]
 
-[stacks.node]
-detect = ["package.json"]
+[stacks.go]
+detect = ["go.mod", "go.sum"]
+
+[stacks.python]
+detect = ["pyproject.toml", "setup.py", "requirements.txt", "uv.lock"]
+
+[stacks.typescript]
+detect = ["tsconfig.json"]
 
 [stacks.java]
 detect = ["pom.xml", "build.gradle", "build.gradle.kts"]
@@ -31,25 +27,37 @@ detect = ["pom.xml", "build.gradle", "build.gradle.kts"]
 [stacks.kotlin]
 detect = ["build.gradle.kts", "*.kt"]
 
+[stacks.dart]
+detect = ["pubspec.yaml", "*.dart"]
+
+# ╔══════════════════════════════════════════════╗
+# ║  Tier 2 — Solid coverage                     ║
+# ╚══════════════════════════════════════════════╝
+
 [stacks.php]
 detect = ["composer.json", "artisan"]
 
 [stacks.ruby]
 detect = ["Gemfile", "*.gemspec", "Rakefile"]
 
-[stacks.zig]
-detect = ["build.zig"]
+[stacks.csharp]
+detect = ["*.csproj", "*.sln"]
+
+[stacks.cpp]
+detect = ["CMakeLists.txt", "*.cpp", "*.hpp"]
+
+[stacks.scala]
+detect = ["build.sbt", "*.scala"]
 
 [stacks.elixir]
 detect = ["mix.exs"]
 
-[stacks.cpp]
-detect = ["CMakeLists.txt"]
+[stacks.zig]
+detect = ["build.zig"]
 
-# --- Popular languages ---
-
-[stacks.scala]
-detect = ["build.sbt", "*.scala"]
+# ╔══════════════════════════════════════════════╗
+# ║  Tier 3 — Essential patterns                 ║
+# ╚══════════════════════════════════════════════╝
 
 [stacks.haskell]
 detect = ["*.cabal", "stack.yaml", "cabal.project"]
@@ -75,33 +83,18 @@ detect = ["cpanfile", "Makefile.PL", "dist.ini"]
 [stacks.lua]
 detect = ["*.rockspec", ".luacheckrc"]
 
-[stacks.dart]
-detect = ["pubspec.yaml", "*.dart"]
-
 [stacks.objc]
 detect = ["*.m", "*.mm", "Podfile"]
 
 [stacks.shell]
 detect = ["*.sh", "*.bash", ".shellcheckrc"]
 
-# --- DevOps / Infrastructure ---
+# ╔══════════════════════════════════════════════╗
+# ║  Frameworks                                   ║
+# ╚══════════════════════════════════════════════╝
 
-[stacks.terraform]
-detect = ["*.tf", "*.tfvars"]
-
-[stacks.docker]
-detect = ["Dockerfile", "docker-compose.yml", "compose.yaml"]
-
-[stacks.ansible]
-detect = ["ansible.cfg", "playbook.yml", "roles/"]
-
-[stacks.kubernetes]
-detect = ["kustomization.yaml", "helmfile.yaml", "Chart.yaml"]
-
-# --- Frontend-specific ---
-
-[stacks.typescript]
-detect = ["tsconfig.json"]
+[stacks.flutter]
+detect = ["pubspec.yaml"]
 
 [stacks.svelte]
 detect = ["svelte.config.js", "*.svelte"]
@@ -114,3 +107,22 @@ detect = ["angular.json", "ng-package.json"]
 
 [stacks.react-native]
 detect = ["metro.config.js", "app.json"]
+
+[stacks.node]
+detect = ["package.json"]
+
+# ╔══════════════════════════════════════════════╗
+# ║  DevOps / Infrastructure                      ║
+# ╚══════════════════════════════════════════════╝
+
+[stacks.terraform]
+detect = ["*.tf", "*.tfvars"]
+
+[stacks.docker]
+detect = ["Dockerfile", "docker-compose.yml", "compose.yaml"]
+
+[stacks.ansible]
+detect = ["ansible.cfg", "playbook.yml", "roles/"]
+
+[stacks.kubernetes]
+detect = ["kustomization.yaml", "helmfile.yaml", "Chart.yaml"]
