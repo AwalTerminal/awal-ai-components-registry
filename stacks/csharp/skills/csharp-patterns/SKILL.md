@@ -249,3 +249,31 @@ public class OrderServiceTests
 - Use `ArrayPool<T>.Shared` for larger temporary arrays
 - Use `ValueTask` over `Task` when the common path is synchronous
 - Profile with `BenchmarkDotNet` before and after optimization
+
+## Primary Constructor Patterns (C# 12)
+
+```csharp
+// Primary constructors on classes — DI-friendly
+public class OrderService(IOrderRepository repo, ILogger<OrderService> logger)
+{
+    public async Task<Order> GetOrderAsync(int id)
+    {
+        logger.LogInformation("Fetching order {Id}", id);
+        return await repo.FindAsync(id)
+            ?? throw new NotFoundException($"Order {id} not found");
+    }
+}
+
+// Capture parameters in fields when needed outside methods
+public class CacheService(IMemoryCache cache, TimeSpan defaultExpiry)
+{
+    private readonly TimeSpan _expiry = defaultExpiry;
+
+    public T GetOrCreate<T>(string key, Func<T> factory) =>
+        cache.GetOrCreate(key, entry =>
+        {
+            entry.AbsoluteExpirationRelativeToNow = _expiry;
+            return factory();
+        })!;
+}
+```
