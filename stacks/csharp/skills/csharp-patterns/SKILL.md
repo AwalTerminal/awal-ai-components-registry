@@ -276,4 +276,15 @@ public class CacheService(IMemoryCache cache, TimeSpan defaultExpiry)
             return factory();
         })!;
 }
+
+// Combine with interfaces for testable services
+public class NotificationService(IEmailSender email, ILogger<NotificationService> logger)
+    : INotificationService
+{
+    public async Task NotifyAsync(string userId, string message)
+    {
+        logger.LogInformation("Notifying {UserId}", userId);
+        await email.SendAsync(userId, "Notification", message);
+    }
+}
 ```
