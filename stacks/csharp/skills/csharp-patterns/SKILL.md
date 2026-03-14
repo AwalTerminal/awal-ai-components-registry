@@ -249,6 +249,7 @@ public class OrderServiceTests
 - Use `ArrayPool<T>.Shared` for larger temporary arrays
 - Use `ValueTask` over `Task` when the common path is synchronous
 - Profile with `BenchmarkDotNet` before and after optimization
+- Use `FrozenDictionary` / `FrozenSet` (C# 12) for read-heavy lookup tables
 
 ## Primary Constructor Patterns (C# 12)
 
